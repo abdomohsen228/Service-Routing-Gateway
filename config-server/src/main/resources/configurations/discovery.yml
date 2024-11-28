@@ -1,0 +1,12 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: https://${eureka.instance.hostname}${server.port}/eureka/
+server:
+  port: 8761
+#manage dynamic and distributed service instances effectively.
+#It ensures services can locate each other, balance loads, handle failures, and scale seamlessly. Without it, maintaining communication in a large-scale, distributed environment becomes impractical and error-prone.

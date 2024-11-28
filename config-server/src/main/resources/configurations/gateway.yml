@@ -1,0 +1,24 @@
+eureka:
+  client:
+    register-with-eureka: false # The gateway will not register itself in Eureka, it only consumes services
+
+server:
+  port: 8222 # Gateway will run on port 8222
+
+spring:
+  application:
+    name: gateway # Identifies the service as 'gateway'
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true # Enables dynamic routing using Eureka service discovery
+      routes:
+        - id: students
+          uri: http://localhost:8090 # Students Service base URL
+          predicates:
+            - Path=/api/v1/students/** # Forwards requests with /api/v1/students/** to the Students service
+        - id: schools
+          uri: http://localhost:8070 # Schools Service base URL
+          predicates:
+            - Path=/api/v1/schools/** # Forwards requests with /api/v1/schools/** to the Schools service
